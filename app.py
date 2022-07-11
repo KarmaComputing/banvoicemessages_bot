@@ -12,7 +12,7 @@ TELEGRAM_API_TOKEN = os.getenv("TELEGRAM_API_TOKEN", None)
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", None)
 APP_DEBUG = os.getenv("APP_DEBUG", "0")
 
-API_ENDPOINT = "https://api.telegram.org/bot/"
+API_ENDPOINT = "https://api.telegram.org/bot{TELEGRAM_API_TOKEN}/"
 
 
 async def index(request):
@@ -25,11 +25,11 @@ async def index(request):
         reply = "We've banned voice messages. Deleting it now."
         # Warn the user
         requests.get(
-            f"{API_ENDPOINT}{TELEGRAM_API_TOKEN}/sendMessage?chat_id={TELEGRAM_CHAT_ID}&text={reply}"  # noqa: E501
+            f"{API_ENDPOINT}sendMessage?chat_id={TELEGRAM_CHAT_ID}&text={reply}"  # noqa: E501
         )
         # Delete their voice message
         requests.get(
-            f"{API_ENDPOINT}{TELEGRAM_API_TOKEN}/deleteMessage?chat_id={TELEGRAM_CHAT_ID}&message_id={message_id}"  # noqa: E501
+            f"{API_ENDPOINT}deleteMessage?chat_id={TELEGRAM_CHAT_ID}&message_id={message_id}"  # noqa: E501
         )
     return PlainTextResponse("OK")
 
