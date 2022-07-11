@@ -12,7 +12,7 @@ TELEGRAM_API_TOKEN = os.getenv("TELEGRAM_API_TOKEN", None)
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", None)
 APP_DEBUG = os.getenv("APP_DEBUG", "0")
 
-API_ENDPOINT = "https://api.telegram.org/bot{TELEGRAM_API_TOKEN}/"
+API_ENDPOINT = f"https://api.telegram.org/bot{TELEGRAM_API_TOKEN}/"
 
 
 async def index(request):
